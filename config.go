@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/pelletier/go-toml/v2"
 )
@@ -49,6 +50,20 @@ func (c *APMConfig) WriteToFile(path string) error {
 		return err
 	}
 
+	if err := os.WriteFile(path, cfgMarshalled, 0644); err != nil {
+		log.Println("Failed to write config file", path)
+		return err
+	}
+	return nil
+}
+
+func (c *APMConfig) Save() error {
+	cfgMarshalled, err := toml.Marshal(c)
+	if err != nil {
+		log.Println("Failed to marshal config")
+		return err
+	}
+	path := filepath.Join(c.InstallPath, CONFIG_FILE_NAME)
 	if err := os.WriteFile(path, cfgMarshalled, 0644); err != nil {
 		log.Println("Failed to write config file", path)
 		return err

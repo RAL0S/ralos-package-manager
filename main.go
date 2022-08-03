@@ -47,7 +47,7 @@ func listInstalledPackages() error {
 	fmt.Println("[+] Listing installed packages")
 	if len(cfg.Packages) == 0 {
 		fmt.Println("[!] No packages are installed.")
-	}	
+	}
 	for _, pkgInfo := range cfg.Packages {
 		fmt.Printf("%s == %s\n", pkgInfo.Name, pkgInfo.Version)
 	}
@@ -110,6 +110,32 @@ func main() {
 						pm := PackageManager{}
 						if pm.initialize(GetConfig()) {
 							pm.installPackage(targetPkg)
+						}
+					}
+					return nil
+				},
+			},
+			{
+				Name:  "remove",
+				Usage: "Removes an installed package",
+				Flags: []cli.Flag{
+					&cli.BoolFlag{
+						Name:    "yes",
+						Aliases: []string{"y"},
+						Value:   false,
+						Usage:   "Do not prompt to confirm before before removal",
+					},
+				},
+				Action: func(ctx *cli.Context) error {
+					if ensureInitialized() {
+						if ctx.NArg() == 0 {
+							fmt.Println("Please specify the package to remove!")
+							return nil
+						}
+						targetPkg := ctx.Args().First()
+						pm := PackageManager{}
+						if pm.initialize(GetConfig()) {
+							pm.removePackage(targetPkg, ctx.Bool("yes"))
 						}
 					}
 					return nil

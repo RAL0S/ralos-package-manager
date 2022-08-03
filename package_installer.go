@@ -125,7 +125,7 @@ func (pi *PackageInstaller) Install() bool {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	log.Println("Running package installation script, please wait...")
-	err = cmd.Run()	
+	err = cmd.Run()
 
 	// logFileName := fmt.Sprintf("%s-%s-%d.log", pkgDetails.Name, pkgDetails.Version, time.Now().Unix())
 	// os.WriteFile(logFileName, output, 0644)

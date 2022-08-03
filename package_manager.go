@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -53,11 +54,33 @@ func (pm *PackageManager) getInstalledVersion(localName string) string {
 	return cfg.Packages[localName].Version
 }
 
-func (pm *PackageManager) removePackage(pkgToRemove string) {
+func (pm *PackageManager) removePackage(pkgToRemove string, noPrompt bool) {
+	pkgToRemove = strings.ToLower(pkgToRemove)
 	cfg := GetConfig()
-	pkgDetails := cfg.Packages[pkgToRemove]
+	pkgDetails, exists := cfg.Packages[pkgToRemove]
+	if !exists {
+		log.Printf("No such package '%s' is installed\n", pkgToRemove)
+		return
+	}
+	if !noPrompt {
+		fmt.Printf("This will remove %s version %s\n", pkgDetails.Name, pkgDetails.Version)
+		fmt.Println("Are you sure (y/n)? ")
+
+		var choice string
+		fmt.Scanln(&choice)
+		if strings.ToLower(choice) != "y" {
+			fmt.Println("Aborting.")
+			return
+		}
+	}
+	log.Printf("Removing package %s version %s\n", pkgToRemove, pkgDetails.Version)
 	pkgPath := filepath.Join(cfg.InstallPath, "packages", pkgDetails.Name+"-"+pkgDetails.Version)
-	os.RemoveAll(pkgPath)
+	err := os.RemoveAll(pkgPath)
+	delete(cfg.Packages, pkgToRemove)
+	cfg.Save()
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func (pm *PackageManager) installPackage(pkgToInstall string) {
@@ -75,7 +98,7 @@ func (pm *PackageManager) installPackage(pkgToInstall string) {
 			return
 		}
 		log.Printf("Found updated package, installed=%s, available=%s, upgrading\n", installedVersion, pkg.Version)
-		isUpgrade = true		
+		isUpgrade = true
 	}
 
 	log.Printf("Installing %s, version %s\n", pkgToInstall, pkg.Version)
@@ -90,12 +113,12 @@ func (pm *PackageManager) installPackage(pkgToInstall string) {
 
 		if isUpgrade {
 			log.Println("Removing old package version")
-			pm.removePackage(pkgToInstall)
+			pm.removePackage(pkgToInstall, true)
 		}
 
 		log.Println("Updating local package index")
 		pm.cfg.Packages[pkgToInstall] = pkg
-		if err := pm.cfg.WriteToFile(filepath.Join(pm.cfg.InstallPath, CONFIG_FILE_NAME)); err != nil {
+		if err := pm.cfg.Save(); err != nil {
 			log.Println("Successfully installed but failed to update  the local package index")
 		} else {
 			log.Printf("Successfully installed %s, version %s\n", pkgToInstall, pkg.Version)
