@@ -4,7 +4,7 @@ The source code of AttifyOS package manager
 
 ## Usage
 
-Copy the apm binary to an empty folder, preferably with the home directory.
+Copy the apm binary to an empty folder, preferably within the home directory.
 
 ```
 /home/ubuntu/attifyos/apm
@@ -12,7 +12,7 @@ Copy the apm binary to an empty folder, preferably with the home directory.
 
 Henceforth packages will be installed within the `/home/ubuntu/attifyos/` directory.
 
-For the first time, inititalize the package manager by running.
+For the first time, inititalize the package manager by running
 
 ```
 ./apm init
