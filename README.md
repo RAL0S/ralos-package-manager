@@ -1,6 +1,12 @@
 # AttifyOS Package Manager
 
-The source code of AttifyOS package manager
+The source code of AttifyOS package manager.
+
+## Compile
+
+```
+go build -o apm
+```
 
 ## Usage
 
