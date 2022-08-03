@@ -102,7 +102,6 @@ func main() {
 							return nil
 						}
 						targetPkg := ctx.Args().First()
-						log.Println("Installing", targetPkg)
 						pm := PackageManager{}
 						if pm.initialize(GetConfig()) {
 							pm.installPackage(targetPkg)
