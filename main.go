@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/urfave/cli/v2"
 )
@@ -43,13 +44,10 @@ func initAPM() error {
 
 func listInstalledPackages() error {
 	cfg := GetConfig()
-	if err := cfg.LoadFromFile("apm.toml"); err != nil {
-		return err
-	}
+	fmt.Println("[+] Listing installed packages")
 	if len(cfg.Packages) == 0 {
 		fmt.Println("[!] No packages are installed.")
-	}
-	fmt.Println("[+] Listing installed packages")
+	}	
 	for _, pkgInfo := range cfg.Packages {
 		fmt.Printf("%s == %s\n", pkgInfo.Name, pkgInfo.Version)
 	}
@@ -57,12 +55,19 @@ func listInstalledPackages() error {
 }
 
 func ensureInitialized() bool {
-	if _, err := os.Stat(CONFIG_FILE_NAME); err != nil {
+	exePath, err := os.Executable()
+	if err != nil {
+		log.Println("Failed to get executable path")
+		return false
+	}
+
+	configFilePath := filepath.Join(filepath.Dir(exePath), CONFIG_FILE_NAME)
+	if _, err := os.Stat(configFilePath); err != nil {
 		fmt.Println("[!] Please initialize before running other commands!")
 		return false
 	}
 	cfg := GetConfig()
-	if err := cfg.LoadFromFile("apm.toml"); err != nil {
+	if err := cfg.LoadFromFile(configFilePath); err != nil {
 		fmt.Println("[!] Please initialize before running other commands!")
 		return false
 	}
