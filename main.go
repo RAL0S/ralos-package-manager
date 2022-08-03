@@ -22,16 +22,6 @@ func initAPM() error {
 	cfg := GetConfig()
 	cfg.InstallPath = currentDir
 
-	/*Packages: map[string]PackageInfo{
-		"cutter": {
-			Name: "cutter",
-			Version: "2.1.0",
-		},
-		"ghidra": {
-			Name: "ghidra",
-			Version: "10.1.5",
-		},
-	},*/
 	err = os.Mkdir("packages", 0755)
 	if err != nil {
 		log.Println("Failed to create packages directory")
