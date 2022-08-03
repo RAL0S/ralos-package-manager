@@ -37,6 +37,21 @@ func (pm *PackageManager) initialize(cfg *APMConfig) bool {
 	return true
 }
 
+func (pm *PackageManager) isInstalled(localName string) bool {
+	cfg := GetConfig()
+	for pkgName, _ := range cfg.Packages {
+		if pkgName == localName {
+			return true
+		}
+	}
+	return false
+}
+
+func (pm *PackageManager) getInstalledVersion(localName string) string {
+	cfg := GetConfig()
+	return cfg.Packages[localName].Version
+}
+
 func (pm *PackageManager) installPackage(pkgToInstall string) {
 	pkgToInstall = strings.ToLower(pkgToInstall)
 	pkg, exists := pm.pkgIndex.Packages[pkgToInstall]
@@ -44,13 +59,22 @@ func (pm *PackageManager) installPackage(pkgToInstall string) {
 		log.Printf("No package with name %s exists\n", pkgToInstall)
 		return
 	}
+	if pm.isInstalled(pkgToInstall) {
+		if pm.getInstalledVersion(pkgToInstall) == pkg.Version {
+			log.Printf("Package %s, version %s is already installed\n", pkgToInstall, pkg.Version)
+		} else {
+			log.Printf("Found updated package %s, version %s\n", pkgToInstall, pkg.Version)
+		}
+		return
+	}
+
 	log.Printf("Installing %s, version %s\n", pkgToInstall, pkg.Version)
 	pkgInstaller := PackageInstaller{}
 	pkgInstaller.New(pm.cfg, pkg)
 	status := pkgInstaller.Install()
 	if status {
 		log.Println("Updating local package index")
-		
+
 		//No previously installed package
 		if len(pm.cfg.Packages) == 0 {
 			pm.cfg.Packages = make(map[string]PackageInfo)
@@ -59,8 +83,8 @@ func (pm *PackageManager) installPackage(pkgToInstall string) {
 		if err := pm.cfg.WriteToFile(filepath.Join(pm.cfg.InstallPath, CONFIG_FILE_NAME)); err != nil {
 			log.Println("Successfully installed but failed to update  the local package index")
 		} else {
-			log.Printf("Successfully installed %s\n", pkgToInstall)			
-		}		
+			log.Printf("Successfully installed %s, version%s\n", pkgToInstall, pkg.Version)
+		}
 		return
 	}
 	log.Println("Installation failed")
