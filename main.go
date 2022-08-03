@@ -19,6 +19,11 @@ func initAPM() error {
 		log.Println("Failed to fetch working directory")
 		return err
 	}
+
+	if _, err := os.Stat("packages"); err == nil {
+		return errors.New("cannot initialize, packages directory already exists")
+	}
+
 	cfg := GetConfig()
 	cfg.InstallPath = currentDir
 
@@ -28,7 +33,12 @@ func initAPM() error {
 		return err
 	}
 
-	return cfg.WriteToFile(CONFIG_FILE_NAME)
+	err = cfg.WriteToFile(CONFIG_FILE_NAME)
+	if err != nil {
+		return err
+	}
+	log.Println("Package manager initialized, created apm.toml")
+	return nil
 }
 
 func listInstalledPackages() error {
