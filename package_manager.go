@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -48,7 +49,18 @@ func (pm *PackageManager) installPackage(pkgToInstall string) {
 	pkgInstaller.New(pm.cfg, pkg)
 	status := pkgInstaller.Install()
 	if status {
-		log.Printf("Successfully installed %s\n", pkgToInstall)
+		log.Println("Updating local package index")
+		
+		//No previously installed package
+		if len(pm.cfg.Packages) == 0 {
+			pm.cfg.Packages = make(map[string]PackageInfo)
+		}
+		pm.cfg.Packages[pkgToInstall] = pkg
+		if err := pm.cfg.WriteToFile(filepath.Join(pm.cfg.InstallPath, CONFIG_FILE_NAME)); err != nil {
+			log.Println("Successfully installed but failed to update  the local package index")
+		} else {
+			log.Printf("Successfully installed %s\n", pkgToInstall)			
+		}		
 		return
 	}
 	log.Println("Installation failed")
