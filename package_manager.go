@@ -41,6 +41,7 @@ func (pm *PackageManager) installPackage(pkgToInstall string) {
 	pkg, exists := pm.pkgIndex.Packages[pkgToInstall]
 	if !exists {
 		log.Printf("No package with name %s exists\n", pkgToInstall)
+		return
 	}
 	log.Printf("Installing %s, version %s\n", pkgToInstall, pkg.Version)
 	pkgInstaller := PackageInstaller{}

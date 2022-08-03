@@ -1,12 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
-	"time"
 
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
@@ -82,6 +80,11 @@ func (pi *PackageInstaller) processPackageDetails() *PackageDetail {
 	return &pkgDescriptor.PkgDetail
 }
 
+func (pi *PackageInstaller) cleanup() {
+	log.Println("Cleaning up")
+	os.RemoveAll(pi.tmpDir)
+}
+
 func (pi *PackageInstaller) Install() bool {
 	if !pi.bootStrap() {
 		log.Println("Failed while bootstrapping")
@@ -118,19 +121,24 @@ func (pi *PackageInstaller) Install() bool {
 		"APM_TMP_DIR="+pi.tmpDir,
 		"APM_PKG_INSTALL_DIR="+pkgInstallDir,
 	)
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
 	log.Println("Running package installation script, please wait...")
-	output, err := cmd.CombinedOutput()
-	logFileName := fmt.Sprintf("%s-%s-%d.log", pkgDetails.Name, pkgDetails.Version, time.Now().Unix())
-	os.WriteFile(logFileName, output, 0644)
+	err = cmd.Run()	
+
+	// logFileName := fmt.Sprintf("%s-%s-%d.log", pkgDetails.Name, pkgDetails.Version, time.Now().Unix())
+	// os.WriteFile(logFileName, output, 0644)
 
 	if err != nil {
-		log.Println("Failed to execute install script, please check the logfile", logFileName)
+		log.Println("Failed to execute install script")
 		return false
 	}
 
 	if cmd.ProcessState.ExitCode() != 0 {
-		log.Println("Install script returned non zero status code, please check the logfile", logFileName)
+		log.Println("Install script returned non zero status code")
 		return false
 	}
+	pi.cleanup()
 	return true
 }
