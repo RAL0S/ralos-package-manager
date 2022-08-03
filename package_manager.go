@@ -39,7 +39,7 @@ func (pm *PackageManager) initialize(cfg *APMConfig) bool {
 
 func (pm *PackageManager) isInstalled(localName string) bool {
 	cfg := GetConfig()
-	for pkgName, _ := range cfg.Packages {
+	for pkgName := range cfg.Packages {
 		if pkgName == localName {
 			return true
 		}
