@@ -26,15 +26,17 @@ type PackageDescriptor struct {
 }
 
 type PackageInstaller struct {
-	pkgInfo      PackageInfo
-	tmpDir       string
-	pkgCloneDir string
-	cfg          *APMConfig
+	installTesting bool
+	pkgInfo        PackageInfo
+	tmpDir         string
+	pkgCloneDir    string
+	cfg            *APMConfig
 }
 
-func (pi *PackageInstaller) New(cfg *APMConfig, pkgInfo PackageInfo) {
+func (pi *PackageInstaller) New(cfg *APMConfig, pkgInfo PackageInfo, installTesting bool) {
 	pi.cfg = cfg
 	pi.pkgInfo = pkgInfo
+	pi.installTesting = installTesting
 }
 
 func (pi *PackageInstaller) bootstrap() bool {
@@ -45,7 +47,7 @@ func (pi *PackageInstaller) bootstrap() bool {
 		return false
 	}
 
-	pi.pkgCloneDir = filepath.Join(pi.cfg.InstallPath, CLONE_DIR_NAME, pi.pkgInfo.Name + "-" + pi.pkgInfo.Version)
+	pi.pkgCloneDir = filepath.Join(pi.cfg.InstallPath, CLONE_DIR_NAME, pi.pkgInfo.Name+"-"+pi.pkgInfo.Version)
 	os.RemoveAll(pi.pkgCloneDir)
 
 	if err = os.Mkdir(pi.pkgCloneDir, 0755); err != nil {
@@ -54,14 +56,24 @@ func (pi *PackageInstaller) bootstrap() bool {
 	}
 
 	log.Println("Cloning package repo to", pi.pkgCloneDir)
+
+	var ref plumbing.ReferenceName
+	if !pi.installTesting {
+		ref = plumbing.NewTagReferenceName(pi.pkgInfo.RepoTag)
+	} else {
+		ref = plumbing.NewBranchReferenceName("testing")
+	}
+
 	_, err = git.PlainClone(pi.pkgCloneDir, false, &git.CloneOptions{
 		URL:           pi.pkgInfo.RepoUrl,
 		Depth:         1,
 		SingleBranch:  true,
-		ReferenceName: plumbing.NewTagReferenceName(pi.pkgInfo.RepoTag),
+		ReferenceName: ref,
 	})
+
 	if err != nil {
 		log.Println("Failed to clone package repository:", err)
+		os.RemoveAll(pi.pkgCloneDir)
 		return false
 	}
 	return true
@@ -128,16 +140,16 @@ func (pi *PackageInstaller) Install() bool {
 	cmd := exec.Command(installScriptPath, "install")
 	cmd.Env = append(
 		os.Environ(),
-		"APM_TMP_DIR=" + pi.tmpDir,
-		"APM_PKG_INSTALL_DIR=" + pkgInstallDir,
-		"APM_PKG_BIN_DIR=" + filepath.Join(pi.cfg.InstallPath, BIN_DIR_NAME),
+		"APM_TMP_DIR="+pi.tmpDir,
+		"APM_PKG_INSTALL_DIR="+pkgInstallDir,
+		"APM_PKG_BIN_DIR="+filepath.Join(pi.cfg.InstallPath, BIN_DIR_NAME),
 	)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	log.Println("Running package installation script, please wait...")
 	err = cmd.Run()
-	
+
 	if err != nil {
 		log.Println("Failed to execute install script")
 		return false

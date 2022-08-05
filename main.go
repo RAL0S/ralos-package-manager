@@ -68,8 +68,13 @@ func listInstalledPackages() error {
 	if len(cfg.Packages) == 0 {
 		fmt.Println("[!] No packages are installed.")
 	}
+
 	for _, pkgInfo := range cfg.Packages {
-		fmt.Printf("%s == %s\n", pkgInfo.Name, pkgInfo.Version)
+		if pkgInfo.Testing {
+			fmt.Println(pkgInfo.Name, " (*testing)") 
+		} else {
+			fmt.Printf("%s == %s\n", pkgInfo.Name, pkgInfo.Version)
+		}
 	}
 	return nil
 }
@@ -120,6 +125,14 @@ func main() {
 			{
 				Name:  "install",
 				Usage: "Install a package",
+				Flags: []cli.Flag{
+					&cli.BoolFlag{
+						Name: "testing",
+						Aliases: []string{"t", "test"},
+						Value: false,
+						Usage: "Install from testing branch (NOT RECOMMENDED)",
+					},
+				},
 				Action: func(ctx *cli.Context) error {
 					if ensureInitialized() {
 						if ctx.NArg() == 0 {
@@ -129,7 +142,7 @@ func main() {
 						targetPkg := ctx.Args().First()
 						pm := PackageManager{}
 						if pm.initialize(GetConfig()) {
-							pm.installPackage(targetPkg)
+							pm.installPackage(targetPkg, ctx.Bool("testing"))
 						}
 					}
 					return nil

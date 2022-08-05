@@ -37,10 +37,11 @@ func (pm *PackageManager) initialize(cfg *APMConfig) bool {
 	return true
 }
 
-func (pm *PackageManager) isInstalled(localName string) bool {
+func (pm *PackageManager) isInstalled(localName string, isTesting bool) bool {	
+	if isTesting {return false}
 	cfg := GetConfig()
-	for pkgName := range cfg.Packages {
-		if pkgName == localName {
+	for pkgName, pkgInfo := range cfg.Packages {
+		if pkgName == localName && pkgInfo.Testing == isTesting {
 			return true
 		}
 	}
@@ -61,8 +62,12 @@ func (pm *PackageManager) removePackage(pkgToRemove string, noPrompt bool) {
 		return
 	}
 	if !noPrompt {
-		fmt.Printf("This will remove %s version %s\n", pkg.Name, pkg.Version)
-		fmt.Println("Are you sure (y/n)? ")
+		if pkg.Testing {
+			fmt.Printf("This will remove %s (testing)\n", pkg.Name)
+		} else {
+			fmt.Printf("This will remove %s version %s\n", pkg.Name, pkg.Version)
+		}
+		fmt.Print("Are you sure (y/n)? ")
 
 		var choice string
 		fmt.Scanln(&choice)
@@ -85,7 +90,7 @@ func (pm *PackageManager) removePackage(pkgToRemove string, noPrompt bool) {
 	}
 }
 
-func (pm *PackageManager) installPackage(pkgToInstall string) {
+func (pm *PackageManager) installPackage(pkgToInstall string, installTesting bool) {
 	pkgToInstall = strings.ToLower(pkgToInstall)
 	pkg, exists := pm.pkgIndex.Packages[pkgToInstall]
 	if !exists {
@@ -93,7 +98,15 @@ func (pm *PackageManager) installPackage(pkgToInstall string) {
 		return
 	}
 	isUpgrade := false
-	if pm.isInstalled(pkgToInstall) {
+	if pm.isInstalled(pkgToInstall, false) {
+		// Stable version installed
+	
+		// Don't install testing version if stable already installed
+		if installTesting {
+			log.Println("Can't install testing version as stable version is already installed")
+			return
+		}
+
 		installedVersion := pm.getInstalledVersion(pkgToInstall)
 		if installedVersion == pkg.Version {
 			log.Printf("Package %s, version %s is already installed\n", pkgToInstall, pkg.Version)
@@ -103,9 +116,13 @@ func (pm *PackageManager) installPackage(pkgToInstall string) {
 		isUpgrade = true
 	}
 
-	log.Printf("Installing %s, version %s\n", pkgToInstall, pkg.Version)
+	if installTesting {
+		log.Printf("Installing %s (*testing)\n", pkgToInstall)
+	} else {
+		log.Printf("Installing %s, version %s\n", pkgToInstall, pkg.Version)
+	}
 	pkgInstaller := PackageInstaller{}
-	pkgInstaller.New(pm.cfg, pkg)
+	pkgInstaller.New(pm.cfg, pkg, installTesting)
 	status := pkgInstaller.Install()
 	if status {
 		//No previously installed package
@@ -119,7 +136,9 @@ func (pm *PackageManager) installPackage(pkgToInstall string) {
 		}
 
 		log.Println("Updating local package index")
+		if installTesting {	pkg.Testing = true }
 		pm.cfg.Packages[pkgToInstall] = pkg
+		
 		if err := pm.cfg.Save(); err != nil {
 			log.Println("Successfully installed but failed to update  the local package index")
 		} else {

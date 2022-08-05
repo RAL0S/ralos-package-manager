@@ -24,6 +24,7 @@ type PackageInfo struct {
 	RepoUrl     string `toml:"repo_url"`
 	RepoTag     string `toml:"repo_tag"`
 	License     string `toml:"license"`
+	Testing     bool   `toml:"testing"`
 }
 
 type APMConfig struct {
