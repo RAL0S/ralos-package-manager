@@ -21,16 +21,36 @@ func initAPM() error {
 		return err
 	}
 
-	if _, err := os.Stat("packages"); err == nil {
+	if _, err := os.Stat(PKG_DIR_NAME); err == nil {
 		return errors.New("cannot initialize, packages directory already exists")
+	}
+
+	if _, err := os.Stat(BIN_DIR_NAME); err == nil {
+		return errors.New("cannot initialize, bin directory already exists")
+	}
+
+	if _, err := os.Stat(CLONE_DIR_NAME); err == nil {
+		return errors.New("cannot initialize, installers directory already exists")
 	}
 
 	cfg := GetConfig()
 	cfg.InstallPath = currentDir
 
-	err = os.Mkdir("packages", 0755)
+	err = os.Mkdir(PKG_DIR_NAME, 0755)
 	if err != nil {
 		log.Println("Failed to create packages directory")
+		return err
+	}
+
+	err = os.Mkdir(BIN_DIR_NAME, 0755)
+	if err != nil {
+		log.Println("Failed to create bin directory")
+		return err
+	}
+
+	err = os.Mkdir(CLONE_DIR_NAME, 0755)
+	if err != nil {
+		log.Println("Failed to create installer directory")
 		return err
 	}
 

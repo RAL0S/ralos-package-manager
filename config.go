@@ -11,6 +11,9 @@ import (
 const (
 	APP_VERSION       = "0.0.1"
 	CONFIG_FILE_NAME  = "apm.toml"
+	BIN_DIR_NAME      = "bin"
+	PKG_DIR_NAME      = "packages"
+	CLONE_DIR_NAME    = "installers"
 	PACKAGE_INDEX_URL = "https://raw.githubusercontent.com/AttifyOS/package-index/main/index.toml"
 )
 

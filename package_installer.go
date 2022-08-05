@@ -26,9 +26,10 @@ type PackageDescriptor struct {
 }
 
 type PackageInstaller struct {
-	pkgInfo PackageInfo
-	tmpDir  string
-	cfg     *APMConfig
+	pkgInfo      PackageInfo
+	tmpDir       string
+	pkgCloneDir string
+	cfg          *APMConfig
 }
 
 func (pi *PackageInstaller) New(cfg *APMConfig, pkgInfo PackageInfo) {
@@ -36,7 +37,7 @@ func (pi *PackageInstaller) New(cfg *APMConfig, pkgInfo PackageInfo) {
 	pi.pkgInfo = pkgInfo
 }
 
-func (pi *PackageInstaller) bootStrap() bool {
+func (pi *PackageInstaller) bootstrap() bool {
 	var err error
 	pi.tmpDir, err = os.MkdirTemp("", "apm_tmp")
 	if err != nil {
@@ -44,8 +45,16 @@ func (pi *PackageInstaller) bootStrap() bool {
 		return false
 	}
 
-	log.Println("Cloning package repo to", pi.tmpDir)
-	_, err = git.PlainClone(pi.tmpDir, false, &git.CloneOptions{
+	pi.pkgCloneDir = filepath.Join(pi.cfg.InstallPath, CLONE_DIR_NAME, pi.pkgInfo.Name + "-" + pi.pkgInfo.Version)
+	os.RemoveAll(pi.pkgCloneDir)
+
+	if err = os.Mkdir(pi.pkgCloneDir, 0755); err != nil {
+		log.Println("Failed to create clone directory:", err)
+		return false
+	}
+
+	log.Println("Cloning package repo to", pi.pkgCloneDir)
+	_, err = git.PlainClone(pi.pkgCloneDir, false, &git.CloneOptions{
 		URL:           pi.pkgInfo.RepoUrl,
 		Depth:         1,
 		SingleBranch:  true,
@@ -59,7 +68,7 @@ func (pi *PackageInstaller) bootStrap() bool {
 }
 
 func (pi *PackageInstaller) processPackageDetails() *PackageDetail {
-	pkgTomlPath := filepath.Join(pi.tmpDir, "package.toml")
+	pkgTomlPath := filepath.Join(pi.pkgCloneDir, "package.toml")
 	pkgTomlBytes, err := os.ReadFile(pkgTomlPath)
 	if err != nil {
 		log.Println("Failed to read package config file", pkgTomlPath)
@@ -86,7 +95,7 @@ func (pi *PackageInstaller) cleanup() {
 }
 
 func (pi *PackageInstaller) Install() bool {
-	if !pi.bootStrap() {
+	if !pi.bootstrap() {
 		log.Println("Failed while bootstrapping")
 		return false
 	}
@@ -97,15 +106,16 @@ func (pi *PackageInstaller) Install() bool {
 		return false
 	}
 
-	installScriptPath := filepath.Join(pi.tmpDir, pkgDetails.InstallScript)
+	installScriptPath := filepath.Join(pi.pkgCloneDir, pkgDetails.InstallScript)
 	if _, err := os.Stat(installScriptPath); err != nil {
 		log.Println("Package installer script not found:", installScriptPath)
 		return false
 	}
+
 	// Make install script executable
 	os.Chmod(installScriptPath, 0744)
 
-	pkgInstallDir := filepath.Join(pi.cfg.InstallPath, "packages", pkgDetails.Name+"-"+pkgDetails.Version)
+	pkgInstallDir := filepath.Join(pi.cfg.InstallPath, PKG_DIR_NAME, pkgDetails.Name+"-"+pkgDetails.Version)
 	if _, err := os.Stat(pkgInstallDir); err == nil {
 		os.RemoveAll(pkgInstallDir)
 	}
@@ -115,21 +125,19 @@ func (pi *PackageInstaller) Install() bool {
 		return false
 	}
 
-	cmd := exec.Command(installScriptPath)
+	cmd := exec.Command(installScriptPath, "install")
 	cmd.Env = append(
 		os.Environ(),
-		"APM_TMP_DIR="+pi.tmpDir,
-		"APM_PKG_INSTALL_DIR="+pkgInstallDir,
+		"APM_TMP_DIR=" + pi.tmpDir,
+		"APM_PKG_INSTALL_DIR=" + pkgInstallDir,
+		"APM_PKG_BIN_DIR=" + filepath.Join(pi.cfg.InstallPath, BIN_DIR_NAME),
 	)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	log.Println("Running package installation script, please wait...")
 	err = cmd.Run()
-
-	// logFileName := fmt.Sprintf("%s-%s-%d.log", pkgDetails.Name, pkgDetails.Version, time.Now().Unix())
-	// os.WriteFile(logFileName, output, 0644)
-
+	
 	if err != nil {
 		log.Println("Failed to execute install script")
 		return false
