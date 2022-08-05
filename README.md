@@ -35,3 +35,8 @@ From now on, you can install packages by running
 ./apm install ghidra
 ./apm install cutter
 ```
+
+To uninstall a package run
+```
+./apm remove <package_name>
+```
