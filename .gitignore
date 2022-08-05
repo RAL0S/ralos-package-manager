@@ -17,3 +17,4 @@ apm.toml
 bin/
 packages/
 installers/
+apm
