@@ -20,9 +20,7 @@ type PackageManager struct {
 	pkgIndex PackageIndex
 }
 
-func (pm *PackageManager) initialize(cfg *APMConfig) bool {
-	pm.cfg = cfg
-
+func (pm *PackageManager) fetchRemoveIndex() bool {
 	log.Println("Fetching package index")
 	pkgIndexBytes, err := fetchPackageIndex()
 	if err != nil {
@@ -35,6 +33,10 @@ func (pm *PackageManager) initialize(cfg *APMConfig) bool {
 		return false
 	}
 	return true
+}
+
+func (pm *PackageManager) New(cfg *APMConfig) {
+	pm.cfg = cfg
 }
 
 func (pm *PackageManager) isInstalled(localName string, isTesting bool) bool {	

@@ -141,7 +141,8 @@ func main() {
 						}
 						targetPkg := ctx.Args().First()
 						pm := PackageManager{}
-						if pm.initialize(GetConfig()) {
+						pm.New(GetConfig())
+						if pm.fetchRemoveIndex() {
 							pm.installPackage(targetPkg, ctx.Bool("testing"))
 						}
 					}
@@ -167,9 +168,8 @@ func main() {
 						}
 						targetPkg := ctx.Args().First()
 						pm := PackageManager{}
-						if pm.initialize(GetConfig()) {
-							pm.removePackage(targetPkg, ctx.Bool("yes"))
-						}
+						pm.New(GetConfig())
+						pm.removePackage(targetPkg, ctx.Bool("yes"))						
 					}
 					return nil
 				},
