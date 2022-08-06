@@ -101,7 +101,8 @@ func ensureInitialized() bool {
 
 func main() {
 	app := &cli.App{
-		Name:    "AttifyOS package manager (apm)",
+		Name:    "AttifyOS Package Manager (apm)",
+		Usage: "A package management for AttifyOS",		
 		Version: APP_VERSION,
 		Commands: []*cli.Command{
 			{
@@ -175,7 +176,7 @@ func main() {
 				},
 			},
 		},
-	}
+	}	
 
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
