@@ -10,6 +10,31 @@ go build -o apm
 
 ## Usage
 
+```
+$ apm help
+NAME:
+   AttifyOS Package Manager (apm) - A package management for AttifyOS
+
+USAGE:
+   AttifyOS Package Manager (apm) [global options] command [command options] [arguments...]
+
+VERSION:
+   0.0.1
+
+COMMANDS:
+   init, initialize, initialise  Initialize AttifyOS package manager
+   list                          List installed packages
+   install                       Install a package
+   remove                        Removes an installed package
+   help, h                       Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --help, -h     show help (default: false)
+   --version, -v  print the version (default: false)
+```
+
+## Setup
+
 Copy the apm binary to an empty folder, preferably within the home directory.
 
 ```
@@ -26,17 +51,29 @@ For the first time, inititalize the package manager by running
 
 This will create the config file `apm.toml` within the same directory.
 
-From now on, you can install packages by running
+## Package installation 
+
+Packages can be installed by running
 ```
 ./apm install <package_name>
 ```
 
+Example:
 ```
 ./apm install ghidra
 ./apm install cutter
 ```
 
+## Package removal
+
 To uninstall a package run
 ```
 ./apm remove <package_name>
+```
+
+This will prompt for confirmation before removing the package.
+
+To uninstall without prompt run,
+```
+./apm remove --yes <package_name>
 ```
