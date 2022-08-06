@@ -102,7 +102,7 @@ func ensureInitialized() bool {
 func main() {
 	app := &cli.App{
 		Name:    "AttifyOS Package Manager (apm)",
-		Usage: "A package management for AttifyOS",		
+		Usage: "A package management tool for AttifyOS",		
 		Version: APP_VERSION,
 		Commands: []*cli.Command{
 			{
