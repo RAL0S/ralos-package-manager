@@ -51,6 +51,8 @@ For the first time, inititalize the package manager by running
 
 This will create the config file `apm.toml` within the same directory.
 
+For quicker access to the installed tools, add the bin directory (`/home/ubuntu/attifyos/bin`) to the system path. This can be done by adding the line `export PATH=$PATH:/home/ubuntu/attifyos/bin/` at the end of `.bashrc`.
+
 ## Package installation 
 
 Packages can be installed by running
