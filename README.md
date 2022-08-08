@@ -79,3 +79,14 @@ To uninstall without prompt run,
 ```
 ./apm remove --yes <package_name>
 ```
+
+## List of available packages
+
+| Name      | Version                 |
+|-----------|-------------------------|
+| Apktool   | 2.6.1                   |
+| Bettercap | e224eea (June 13, 2022) |
+| Cutter    | 2.1.0                   |
+| Frida     | 15.2.2                  |
+| Ghidra    | 10.1.5                  |
+| JADX      | 1.4.3                   |
