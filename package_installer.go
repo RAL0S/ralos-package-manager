@@ -19,6 +19,7 @@ type PackageDetail struct {
 	License           string `toml:"license"`
 	InstallScript     string `toml:"install_script"`
 	InstallScriptType string `toml:"install_script_type"`
+	PackageType       string `toml:"package_type"`
 }
 
 type PackageDescriptor struct {

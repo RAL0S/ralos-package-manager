@@ -39,8 +39,10 @@ func (pm *PackageManager) New(cfg *APMConfig) {
 	pm.cfg = cfg
 }
 
-func (pm *PackageManager) isInstalled(localName string, isTesting bool) bool {	
-	if isTesting {return false}
+func (pm *PackageManager) isInstalled(localName string, isTesting bool) bool {
+	if isTesting {
+		return false
+	}
 	cfg := GetConfig()
 	for pkgName, pkgInfo := range cfg.Packages {
 		if pkgName == localName && pkgInfo.Testing == isTesting {
@@ -102,7 +104,7 @@ func (pm *PackageManager) installPackage(pkgToInstall string, installTesting boo
 	isUpgrade := false
 	if pm.isInstalled(pkgToInstall, false) {
 		// Stable version installed
-	
+
 		// Don't install testing version if stable already installed
 		if installTesting {
 			log.Println("Can't install testing version as stable version is already installed")
@@ -138,9 +140,11 @@ func (pm *PackageManager) installPackage(pkgToInstall string, installTesting boo
 		}
 
 		log.Println("Updating local package index")
-		if installTesting {	pkg.Testing = true }
+		if installTesting {
+			pkg.Testing = true
+		}
 		pm.cfg.Packages[pkgToInstall] = pkg
-		
+
 		if err := pm.cfg.Save(); err != nil {
 			log.Println("Successfully installed but failed to update  the local package index")
 		} else {

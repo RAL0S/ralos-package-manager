@@ -71,10 +71,10 @@ func listInstalledPackages() error {
 
 	for _, pkgInfo := range cfg.Packages {
 		if pkgInfo.Testing {
-			fmt.Println(pkgInfo.Name, " (*testing)") 
+			fmt.Println(pkgInfo.Name, " (*testing)", pkgInfo.PackageType)
 		} else {
-			fmt.Printf("%s == %s\n", pkgInfo.Name, pkgInfo.Version)
-		}
+			fmt.Printf("%s == %s %s\n", pkgInfo.Name, pkgInfo.Version, pkgInfo.PackageType)
+		}		
 	}
 	return nil
 }
@@ -102,7 +102,7 @@ func ensureInitialized() bool {
 func main() {
 	app := &cli.App{
 		Name:    "AttifyOS Package Manager (apm)",
-		Usage: "A package management tool for AttifyOS",		
+		Usage:   "A package management tool for AttifyOS",
 		Version: APP_VERSION,
 		Commands: []*cli.Command{
 			{
@@ -128,10 +128,10 @@ func main() {
 				Usage: "Install a package",
 				Flags: []cli.Flag{
 					&cli.BoolFlag{
-						Name: "testing",
+						Name:    "testing",
 						Aliases: []string{"t", "test"},
-						Value: false,
-						Usage: "Install from testing branch (NOT RECOMMENDED)",
+						Value:   false,
+						Usage:   "Install from testing branch (NOT RECOMMENDED)",
 					},
 				},
 				Action: func(ctx *cli.Context) error {
@@ -170,13 +170,13 @@ func main() {
 						targetPkg := ctx.Args().First()
 						pm := PackageManager{}
 						pm.New(GetConfig())
-						pm.removePackage(targetPkg, ctx.Bool("yes"))						
+						pm.removePackage(targetPkg, ctx.Bool("yes"))
 					}
 					return nil
 				},
 			},
 		},
-	}	
+	}
 
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)

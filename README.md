@@ -33,6 +33,20 @@ GLOBAL OPTIONS:
    --version, -v  print the version (default: false)
 ```
 
+## Prerequisites
+
+The following packages must be installed before using apm.
+
+```
+unzip
+tar
+wget
+snapd
+```
+
+You may skip installing the packages if they are already installed.
+(Recent versions of Ubuntu already have snapd pre-installed)
+
 ## Setup
 
 Copy the apm binary to an empty folder, preferably within the home directory.
@@ -82,11 +96,12 @@ To uninstall without prompt run,
 
 ## List of available packages
 
-| Name      | Version                 |
-|-----------|-------------------------|
-| Apktool   | 2.6.1                   |
-| Bettercap | e224eea (June 13, 2022) |
-| Cutter    | 2.1.0                   |
-| Frida     | 15.2.2                  |
-| Ghidra    | 10.1.5                  |
-| JADX      | 1.4.3                   |
+| Name      | Version                 | Comments     |
+|-----------|-------------------------|--------------|
+| Apktool   | 2.6.1                   |              |
+| Bettercap | e224eea (June 13, 2022) |              |
+| Cutter    | 2.1.0                   |              |
+| Frida     | 15.2.2                  |              |
+| Ghidra    | 10.1.5                  |              |
+| JADX      | 1.4.3                   |              |
+| Objection | 1.11.0                  | snap package |
