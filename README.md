@@ -104,4 +104,5 @@ To uninstall without prompt run,
 | Frida     | 15.2.2                  |              |
 | Ghidra    | 10.1.5                  |              |
 | JADX      | 1.4.3                   |              |
+| Nmap      | 7.92                    | snap package |
 | Objection | 1.11.0                  | snap package |
