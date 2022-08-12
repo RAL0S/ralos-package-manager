@@ -102,6 +102,7 @@ To uninstall without prompt run,
 | Arduino   | 2.0.0-rc9.2             |              | https://github.com/AttifyOS/ArduinoIDE |
 | Bettercap | e224eea (June 13, 2022) |              | https://github.com/AttifyOS/bettercap  |
 | Cutter    | 2.1.0                   |              | https://github.com/AttifyOS/cutter     |
+| Flashrom  | 1.2                     | snap package | https://github.com/AttifyOS/flashrom   |
 | Frida     | 15.2.2                  |              | https://github.com/AttifyOS/frida      |
 | Ghidra    | 10.1.5                  |              | https://github.com/AttifyOS/ghidra     |
 | JADX      | 1.4.3                   |              | https://github.com/AttifyOS/jadx       |
