@@ -108,6 +108,7 @@ To uninstall without prompt run,
 | Frida     | 15.2.2                  |              | https://github.com/AttifyOS/frida      |
 | Ghidra    | 10.1.5                  |              | https://github.com/AttifyOS/ghidra     |
 | JADX      | 1.4.3                   |              | https://github.com/AttifyOS/jadx       |
+| killerbee | 3.0.0-beta.2            |              | https://github.com/AttifyOS/killerbee  |
 | Nmap      | 7.92                    | snap package | https://github.com/AttifyOS/nmap       |
 | Objection | 1.11.0                  | snap package | https://github.com/AttifyOS/objection  |
 | SRecord   | 1.64                    |              | https://github.com/AttifyOS/SRecord    |
