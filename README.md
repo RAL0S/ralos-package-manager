@@ -40,6 +40,8 @@ The following packages must be installed before using apm.
 ```
 unzip
 tar
+bzip2
+xz-utils
 wget
 snapd
 ```
