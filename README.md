@@ -107,6 +107,7 @@ To uninstall without prompt run,
 | Flashrom  | 1.2                     | snap package | https://github.com/AttifyOS/flashrom   | Aug 12, 2022 |
 | Frida     | 15.2.2                  |              | https://github.com/AttifyOS/frida      | Aug 8, 2022  |
 | Ghidra    | 10.1.5                  |              | https://github.com/AttifyOS/ghidra     | Aug 5, 2022  |
+| Gqrx      | v2.15.9                 |              | https://github.com/AttifyOS/gqrx       | Aug 16, 2022 |
 | JADX      | 1.4.3                   |              | https://github.com/AttifyOS/jadx       | Aug 5, 2022  |
 | killerbee | 3.0.0-beta.2            |              | https://github.com/AttifyOS/killerbee  | Aug 13, 2022 |
 | Nmap      | 7.92                    | snap package | https://github.com/AttifyOS/nmap       | Aug 11, 2022 |
