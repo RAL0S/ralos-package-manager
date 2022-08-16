@@ -38,6 +38,7 @@ GLOBAL OPTIONS:
 The following packages must be installed before using apm.
 
 ```
+fuse   # For running appimages
 unzip
 tar
 bzip2
