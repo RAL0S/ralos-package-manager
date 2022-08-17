@@ -104,6 +104,7 @@ To uninstall without prompt run,
 | Apktool           | 2.6.1                   |              | https://github.com/AttifyOS/apktool           | Aug 8, 2022  |
 | Arduino           | 2.0.0-rc9.2             |              | https://github.com/AttifyOS/ArduinoIDE        | Aug 12, 2022 |
 | attify-badge-tool | 0.0.1                   |              | https://github.com/AttifyOS/attify-badge-tool | Aug 16, 2022 |
+| Baudrate          | 1.0                     |              | https://github.com/AttifyOS/baudrate          | Aug 17, 2022 |
 | Bettercap         | e224eea (June 13, 2022) |              | https://github.com/AttifyOS/bettercap         | Aug 8, 2022  |
 | Cutter            | 2.1.0                   |              | https://github.com/AttifyOS/cutter            | Aug 5, 2022  |
 | Flashrom          | 1.2                     | snap package | https://github.com/AttifyOS/flashrom          | Aug 12, 2022 |
