@@ -121,4 +121,5 @@ To uninstall without prompt run,
 | linuxrouter       | 0.6.6                   |                                       | https://github.com/AttifyOS/linux-router      | Aug 19, 2022 |
 | Nmap              | 7.92                    | snap package                          | https://github.com/AttifyOS/nmap              | Aug 11, 2022 |
 | Objection         | 1.11.0                  | snap package                          | https://github.com/AttifyOS/objection         | Aug 10, 2022 |
+| radare2           | 5.7.6                   |                                       | https://github.com/AttifyOS/radare2           | Aug 23, 2022 |
 | SRecord           | 1.64                    |                                       | https://github.com/AttifyOS/SRecord           | Aug 13, 2022 |
