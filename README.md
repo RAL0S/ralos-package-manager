@@ -109,6 +109,7 @@ To uninstall without prompt run,
 | Bettercap         | e224eea (June 13, 2022) |                                       | https://github.com/AttifyOS/bettercap         | Aug 8, 2022  |
 | binwalk           | 2.3.3                   | snap package                          | https://github.com/AttifyOS/binwalk           | Aug 23, 2022 |
 | bluez             | latest                  | official snap package (auto-updating) | https://github.com/AttifyOS/bluez             | Aug 17, 2022 |
+| colordiff         | 1.0.20                  |                                       | https://github.com/AttifyOS/colordiff         | Aug 24, 2022 |
 | Cutter            | 2.1.0                   |                                       | https://github.com/AttifyOS/cutter            | Aug 5, 2022  |
 | Flashrom          | 1.2                     | snap package                          | https://github.com/AttifyOS/flashrom          | Aug 12, 2022 |
 | fmk               | 0.99--8403a17           | snap package                          | https://github.com/AttifyOS/firmware-mod-kit  | Aug 18, 2022 |
