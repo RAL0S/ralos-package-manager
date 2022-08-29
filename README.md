@@ -111,6 +111,7 @@ To uninstall without prompt run,
 | bluez             | latest                    | official snap package (auto-updating) | https://github.com/AttifyOS/bluez             | Aug 17, 2022 |
 | cantoolz          | 3.7.0                     |                                       | https://github.com/AttifyOS/CANToolz          | Aug 29, 2022 |
 | colordiff         | 1.0.20                    |                                       | https://github.com/AttifyOS/colordiff         | Aug 24, 2022 |
+| cotopaxi          | 1.6.0                     |                                       | https://github.com/AttifyOS/cotopaxi          | Aug 29, 2022 |
 | Cutter            | 2.1.0                     |                                       | https://github.com/AttifyOS/cutter            | Aug 5, 2022  |
 | dwarf             | 1.1.3                     |                                       | https://github.com/AttifyOS/Dwarf             | Aug 29, 2022 |
 | Flashrom          | 1.2                       | snap package                          | https://github.com/AttifyOS/flashrom          | Aug 12, 2022 |
