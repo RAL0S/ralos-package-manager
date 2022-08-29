@@ -112,6 +112,7 @@ To uninstall without prompt run,
 | cantoolz          | 3.7.0                     |                                       | https://github.com/AttifyOS/CANToolz          | Aug 29, 2022 |
 | colordiff         | 1.0.20                    |                                       | https://github.com/AttifyOS/colordiff         | Aug 24, 2022 |
 | Cutter            | 2.1.0                     |                                       | https://github.com/AttifyOS/cutter            | Aug 5, 2022  |
+| dwarf             | 1.1.3                     |                                       | https://github.com/AttifyOS/Dwarf             | Aug 29, 2022 |
 | Flashrom          | 1.2                       | snap package                          | https://github.com/AttifyOS/flashrom          | Aug 12, 2022 |
 | fmk               | 0.99--8403a17             | snap package                          | https://github.com/AttifyOS/firmware-mod-kit  | Aug 18, 2022 |
 | Frida             | 15.2.2                    |                                       | https://github.com/AttifyOS/frida             | Aug 8, 2022  |
