@@ -133,3 +133,4 @@ To uninstall without prompt run,
 | radare2           | 5.7.6                     |                                       | https://github.com/AttifyOS/radare2           | Aug 23, 2022 |
 | routersploit      | 3.4.0                     |                                       | https://github.com/AttifyOS/routersploit      | Aug 29, 2022 |
 | SRecord           | 1.64                      |                                       | https://github.com/AttifyOS/SRecord           | Aug 13, 2022 |
+| urh               | 2.9.3                     |                                       | https://github.com/AttifyOS/urh               | Aug 29, 2022 |
