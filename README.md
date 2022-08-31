@@ -127,6 +127,7 @@ To uninstall without prompt run,
 | kalibrate_rtl     | 0.4.1                     |                                       | https://github.com/AttifyOS/kalibrate-rtl     | Aug 30, 2022 |
 | killerbee         | 3.0.0-beta.2              |                                       | https://github.com/AttifyOS/killerbee         | Aug 13, 2022 |
 | linuxrouter       | 0.6.6                     |                                       | https://github.com/AttifyOS/linux-router      | Aug 19, 2022 |
+| LTE_Cell_Scanner  | bef6ef4 (April 25, 2022)  |                                       | https://github.com/AttifyOS/LTE-Cell-Scanner  | Aug 31, 2022 |
 | Nmap              | 7.92                      | snap package                          | https://github.com/AttifyOS/nmap              | Aug 11, 2022 |
 | Objection         | 1.11.0                    | snap package                          | https://github.com/AttifyOS/objection         | Aug 10, 2022 |
 | ookdecoder        | cc108f9 (July 19, 2021)   |                                       | https://github.com/AttifyOS/ook-decoder       | Aug 26, 2022 |
