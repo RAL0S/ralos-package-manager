@@ -120,6 +120,7 @@ To uninstall without prompt run,
 | fmk               | 0.99--8403a17             | snap package                          | https://github.com/AttifyOS/firmware-mod-kit  | Aug 18, 2022 |
 | Frida             | 15.2.2                    |                                       | https://github.com/AttifyOS/frida             | Aug 8, 2022  |
 | fwanalyzer        | 1.4.3                     |                                       | https://github.com/AttifyOS/fwanalyzer        | Sep 2, 2022  |
+| gdb               | 12.1                      |                                       | https://github.com/AttifyOS/gdb-multiarch     | Sep 4, 2022  |
 | Ghidra            | 10.1.5                    |                                       | https://github.com/AttifyOS/ghidra            | Aug 5, 2022  |
 | gnuradio          | 3.10.3.0                  |                                       | https://github.com/AttifyOS/gnuradio          | Aug 18, 2022 |
 | Gqrx              | v2.15.9                   |                                       | https://github.com/AttifyOS/gqrx              | Aug 16, 2022 |
