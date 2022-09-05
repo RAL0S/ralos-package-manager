@@ -114,6 +114,7 @@ To uninstall without prompt run,
 | colordiff         | 1.0.20                    |                                       | https://github.com/AttifyOS/colordiff         | Aug 24, 2022 |
 | cotopaxi          | 1.6.0                     |                                       | https://github.com/AttifyOS/cotopaxi          | Aug 29, 2022 |
 | Cutter            | 2.1.0                     |                                       | https://github.com/AttifyOS/cutter            | Aug 5, 2022  |
+| drozer            | a80c5f1 (Aug 11, 2022)    |                                       | https://github.com/AttifyOS/drozer            | Sep 05, 2022 |
 | dump1090          | de61bd5 (Feb 4, 2020)     |                                       | https://github.com/AttifyOS/dump1090          | Aug 29, 2022 |
 | dumpflash         | 0.0.1                     |                                       | https://github.com/AttifyOS/dumpflash         | Aug 29, 2022 |
 | dwarf             | 1.1.3                     |                                       | https://github.com/AttifyOS/Dwarf             | Aug 29, 2022 |
