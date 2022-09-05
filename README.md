@@ -45,6 +45,7 @@ bzip2
 xz-utils
 wget
 snapd
+git
 ```
 
 You may skip installing the packages if they are already installed.
