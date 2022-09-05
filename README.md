@@ -126,6 +126,7 @@ To uninstall without prompt run,
 | gnuradio          | 3.10.3.0                  |                                       | https://github.com/AttifyOS/gnuradio          | Aug 18, 2022 |
 | Gqrx              | v2.15.9                   |                                       | https://github.com/AttifyOS/gqrx              | Aug 16, 2022 |
 | inspectrum        | 98b998ff (March 27, 2022) |                                       | https://github.com/AttifyOS/inspectrum        | Aug 25, 2022 |
+| iotsecfuzz        | 1.0.0                     |                                       | https://github.com/AttifyOS/iotsecfuzz        | Sep 5, 2022  |
 | JADX              | 1.4.3                     |                                       | https://github.com/AttifyOS/jadx              | Aug 5, 2022  |
 | kalibrate_rtl     | 0.4.1                     |                                       | https://github.com/AttifyOS/kalibrate-rtl     | Aug 30, 2022 |
 | killerbee         | 3.0.0-beta.2              |                                       | https://github.com/AttifyOS/killerbee         | Aug 13, 2022 |
