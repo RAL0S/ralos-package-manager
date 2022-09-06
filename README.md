@@ -119,6 +119,7 @@ To uninstall without prompt run,
 | dump1090          | de61bd5 (Feb 4, 2020)     |                                       | https://github.com/AttifyOS/dump1090          | Aug 29, 2022 |
 | dumpflash         | 0.0.1                     |                                       | https://github.com/AttifyOS/dumpflash         | Aug 29, 2022 |
 | dwarf             | 1.1.3                     |                                       | https://github.com/AttifyOS/Dwarf             | Aug 29, 2022 |
+| expliot           | 0.9.11                    |                                       | https://github.com/AttifyOS/expliot           | Sep 6, 2022  |
 | Flashrom          | 1.2                       | snap package                          | https://github.com/AttifyOS/flashrom          | Aug 12, 2022 |
 | fmk               | 0.99--8403a17             | snap package                          | https://github.com/AttifyOS/firmware-mod-kit  | Aug 18, 2022 |
 | Frida             | 15.2.2                    |                                       | https://github.com/AttifyOS/frida             | Aug 8, 2022  |
