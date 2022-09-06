@@ -103,6 +103,7 @@ To uninstall without prompt run,
 | Name              | Version                   | Comments                              | Repository URL                                | Build date   |
 |-------------------|---------------------------|---------------------------------------|-----------------------------------------------|--------------|
 | Apktool           | 2.6.1                     |                                       | https://github.com/AttifyOS/apktool           | Aug 8, 2022  |
+| apk-mitm          | 1.2.1                     |                                       | https://github.com/AttifyOS/apk-mitm          | Sep 6, 2022  |
 | Arduino           | 2.0.0-rc9.2               |                                       | https://github.com/AttifyOS/ArduinoIDE        | Aug 12, 2022 |
 | attify-badge-tool | 0.0.1                     |                                       | https://github.com/AttifyOS/attify-badge-tool | Aug 16, 2022 |
 | Baudrate          | 1.0                       |                                       | https://github.com/AttifyOS/baudrate          | Aug 17, 2022 |
