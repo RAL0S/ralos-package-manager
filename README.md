@@ -123,7 +123,7 @@ To uninstall without prompt run,
 | fmk               | 0.99--8403a17             | snap package                          | https://github.com/AttifyOS/firmware-mod-kit  | Aug 18, 2022 |
 | Frida             | 15.2.2                    |                                       | https://github.com/AttifyOS/frida             | Aug 8, 2022  |
 | fwanalyzer        | 1.4.3                     |                                       | https://github.com/AttifyOS/fwanalyzer        | Sep 2, 2022  |
-| gdb               | 12.1                      |                                       | https://github.com/AttifyOS/gdb-multiarch     | Sep 4, 2022  |
+| gdb-multiarch     | 12.1                      |                                       | https://github.com/AttifyOS/gdb-multiarch     | Sep 4, 2022  |
 | Ghidra            | 10.1.5                    |                                       | https://github.com/AttifyOS/ghidra            | Aug 5, 2022  |
 | gnuradio          | 3.10.3.0                  |                                       | https://github.com/AttifyOS/gnuradio          | Aug 18, 2022 |
 | Gqrx              | v2.15.9                   |                                       | https://github.com/AttifyOS/gqrx              | Aug 16, 2022 |
@@ -136,7 +136,7 @@ To uninstall without prompt run,
 | LTE_Cell_Scanner  | bef6ef4 (April 25, 2022)  |                                       | https://github.com/AttifyOS/LTE-Cell-Scanner  | Aug 31, 2022 |
 | Nmap              | 7.92                      | snap package                          | https://github.com/AttifyOS/nmap              | Aug 11, 2022 |
 | Objection         | 1.11.0                    | snap package                          | https://github.com/AttifyOS/objection         | Aug 10, 2022 |
-| ook-decoder        | cc108f9 (July 19, 2021)   |                                       | https://github.com/AttifyOS/ook-decoder       | Aug 26, 2022 |
+| ook-decoder       | cc108f9 (July 19, 2021)   |                                       | https://github.com/AttifyOS/ook-decoder       | Aug 26, 2022 |
 | OpenOCD           | 0.11.0-4                  |                                       | https://github.com/AttifyOS/OpenOCD           | Aug 26, 2022 |
 | radare2           | 5.7.6                     |                                       | https://github.com/AttifyOS/radare2           | Aug 23, 2022 |
 | routersploit      | 3.4.0                     |                                       | https://github.com/AttifyOS/routersploit      | Aug 29, 2022 |
