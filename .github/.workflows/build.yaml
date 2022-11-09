@@ -1,0 +1,25 @@
+ame: Build binaries for Linux
+on: workflow_dispatch
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.18.8'
+      - run: |
+          go build -o apm
+      - name: Set release date
+        run: echo "RELEASE_DATE=$(date -u +%Y.%m.%d)" >> ${GITHUB_ENV}
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          name: ${{ env.RELEASE_DATE }}
+          tag:  ${{ env.RELEASE_DATE }}
+          artifacts: "apm"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
+          draft: true
