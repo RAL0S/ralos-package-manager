@@ -1,4 +1,4 @@
-ame: Build binaries for Linux
+name: Build binaries for Linux
 on: workflow_dispatch
 
 jobs:
