@@ -10,11 +10,11 @@ import (
 )
 
 type PackageUninstaller struct {
-	cfg     *APMConfig
+	cfg     *RALPMConfig
 	pkgInfo PackageInfo
 }
 
-func (pu *PackageUninstaller) New(cfg *APMConfig, pkgInfo PackageInfo) {
+func (pu *PackageUninstaller) New(cfg *RALPMConfig, pkgInfo PackageInfo) {
 	pu.cfg = cfg
 	pu.pkgInfo = pkgInfo
 }
@@ -44,15 +44,15 @@ func (pu *PackageUninstaller) Uninstall() bool {
 	os.Chmod(installScriptPath, 0744)
 
 	pkgPath := filepath.Join(pu.cfg.InstallPath, PKG_DIR_NAME, pu.pkgInfo.Name+"-"+pu.pkgInfo.Version)
-	tmpDir, _ := os.MkdirTemp("", "apm_tmp")
+	tmpDir, _ := os.MkdirTemp("", "ralpm_tmp")
 	defer os.RemoveAll(tmpDir)
 
 	cmd := exec.Command(installScriptPath, "uninstall")
 	cmd.Env = append(
 		os.Environ(),
-		"APM_TMP_DIR="+tmpDir,
-		"APM_PKG_INSTALL_DIR="+pkgPath,
-		"APM_PKG_BIN_DIR="+filepath.Join(pu.cfg.InstallPath, BIN_DIR_NAME),
+		"RALPM_TMP_DIR="+tmpDir,
+		"RALPM_PKG_INSTALL_DIR="+pkgPath,
+		"RALPM_PKG_BIN_DIR="+filepath.Join(pu.cfg.InstallPath, BIN_DIR_NAME),
 	)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout

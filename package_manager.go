@@ -16,7 +16,7 @@ type PackageIndex struct {
 }
 
 type PackageManager struct {
-	cfg      *APMConfig
+	cfg      *RALPMConfig
 	pkgIndex PackageIndex
 }
 
@@ -35,7 +35,7 @@ func (pm *PackageManager) fetchRemoveIndex() bool {
 	return true
 }
 
-func (pm *PackageManager) New(cfg *APMConfig) {
+func (pm *PackageManager) New(cfg *RALPMConfig) {
 	pm.cfg = cfg
 }
 

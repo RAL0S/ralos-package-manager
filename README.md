@@ -1,28 +1,28 @@
-# AttifyOS Package Manager
+# Red Alert Labs OS Package Manager
 
-The source code of AttifyOS package manager.
+The source code of Red Alert Labs OS package manager.
 
 ## Compile
 
 ```
-go build -o apm
+go build -o ralpm
 ```
 
 ## Usage
 
 ```
-$ apm help
+$ ralpm help
 NAME:
-   AttifyOS Package Manager (apm) - A package management for AttifyOS
+   Red Alert Labs OS Package Manager (ralpm) - A package management for Red Alert Labs OS
 
 USAGE:
-   AttifyOS Package Manager (apm) [global options] command [command options] [arguments...]
+   Red Alert Labs OS Package Manager (ralpm) [global options] command [command options] [arguments...]
 
 VERSION:
    0.0.1
 
 COMMANDS:
-   init, initialize, initialise  Initialize AttifyOS package manager
+   init, initialize, initialise  Initialize Red Alert Labs OS package manager
    list                          List installed packages
    install                       Install a package
    remove                        Removes an installed package
@@ -35,7 +35,7 @@ GLOBAL OPTIONS:
 
 ## Prerequisites
 
-The following packages must be installed before using apm.
+The following packages must be installed before using ralpm.
 
 ```
 fuse   # For running appimages
@@ -53,51 +53,51 @@ You may skip installing the packages if they are already installed.
 
 ## Setup
 
-Copy the apm binary to an empty folder, preferably within the home directory.
+Copy the ralpm binary to an empty folder, preferably within the home directory.
 
 ```
-/home/ubuntu/attifyos/apm
+/home/kali/ralos/ralpm
 ```
 
-Henceforth packages will be installed within the `/home/ubuntu/attifyos/` directory.
+Henceforth packages will be installed within the `/home/kali/ralos/` directory.
 
 For the first time, inititalize the package manager by running
 
 ```
-./apm init
+./ralpm init
 ```
 
-This will create the config file `apm.toml` within the same directory.
+This will create the config file `ralpm.toml` within the same directory.
 
-For quicker access to the installed tools, add the bin directory (`/home/ubuntu/attifyos/bin`) to the system path. This can be done by adding the line `export PATH=$PATH:/home/ubuntu/attifyos/bin/` at the end of `.bashrc`.
+For quicker access to the installed tools, add the bin directory (`/home/kali/ralos/bin`) to the system path. This can be done by adding the line `export PATH=$PATH:/home/kali/ralos/bin/` at the end of `.bashrc`.
 
 ## Package installation 
 
 Packages can be installed by running
 ```
-./apm install <package_name>
+./ralpm install <package_name>
 ```
 
 Example:
 ```
-./apm install ghidra
-./apm install cutter
+./ralpm install ghidra
+./ralpm install cutter
 ```
 
 ## Package removal
 
 To uninstall a package run
 ```
-./apm remove <package_name>
+./ralpm remove <package_name>
 ```
 
 This will prompt for confirmation before removing the package.
 
 To uninstall without prompt run,
 ```
-./apm remove --yes <package_name>
+./ralpm remove --yes <package_name>
 ```
 
 ## List of available packages
 
-The list of available packages can be found on the [package-index](https://github.com/AttifyOS/package-index)
+The list of available packages can be found on the [package-index](https://github.com/RALOS/package-index)

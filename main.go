@@ -10,9 +10,9 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func initAPM() error {
+func initRALPM() error {
 	if _, err := os.Stat(CONFIG_FILE_NAME); err == nil {
-		return errors.New("cannot initialize, apm.toml already exists")
+		return errors.New("cannot initialize, ralpm.toml already exists")
 	}
 
 	currentDir, err := os.Getwd()
@@ -58,7 +58,7 @@ func initAPM() error {
 	if err != nil {
 		return err
 	}
-	log.Println("Package manager initialized, created apm.toml")
+	log.Println("Package manager initialized, created ralpm.toml")
 	return nil
 }
 
@@ -101,16 +101,16 @@ func ensureInitialized() bool {
 
 func main() {
 	app := &cli.App{
-		Name:    "AttifyOS Package Manager (apm)",
-		Usage:   "A package management tool for AttifyOS",
+		Name:    "Red Alert Labs OS Package Manager (ralpm)",
+		Usage:   "A package management tool for Red Alert Labs OS",
 		Version: APP_VERSION,
 		Commands: []*cli.Command{
 			{
 				Name:    "init",
 				Aliases: []string{"initialize", "initialise"},
-				Usage:   "Initialize AttifyOS package manager",
+				Usage:   "Initialize Red Alert Labs OS package manager",
 				Action: func(ctx *cli.Context) error {
-					return initAPM()
+					return initRALPM()
 				},
 			},
 			{

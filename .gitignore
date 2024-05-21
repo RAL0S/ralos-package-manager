@@ -13,8 +13,8 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
-apm.toml
+ralpm.toml
 bin/
 packages/
 installers/
-apm
+ralpm

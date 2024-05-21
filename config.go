@@ -10,11 +10,11 @@ import (
 
 const (
 	APP_VERSION       = "0.0.1"
-	CONFIG_FILE_NAME  = "apm.toml"
+	CONFIG_FILE_NAME  = "ralpm.toml"
 	BIN_DIR_NAME      = "bin"
 	PKG_DIR_NAME      = "packages"
 	CLONE_DIR_NAME    = "installers"
-	PACKAGE_INDEX_URL = "https://raw.githubusercontent.com/AttifyOS/package-index/main/index.toml"
+	PACKAGE_INDEX_URL = "https://raw.githubusercontent.com/ral0S/package-index/main/index.toml"
 )
 
 type PackageInfo struct {
@@ -28,14 +28,14 @@ type PackageInfo struct {
 	PackageType string `toml:"package_type"`
 }
 
-type APMConfig struct {
+type RALPMConfig struct {
 	InstallPath string                 `toml:"install_path"`
 	Packages    map[string]PackageInfo `toml:"packages"`
 }
 
-var _cfg *APMConfig
+var _cfg *RALPMConfig
 
-func (c *APMConfig) LoadFromFile(path string) error {
+func (c *RALPMConfig) LoadFromFile(path string) error {
 	cfgBytes, err := os.ReadFile(path)
 	if err != nil {
 		log.Println("Failed to read config file", path)
@@ -48,7 +48,7 @@ func (c *APMConfig) LoadFromFile(path string) error {
 	return nil
 }
 
-func (c *APMConfig) WriteToFile(path string) error {
+func (c *RALPMConfig) WriteToFile(path string) error {
 	cfgMarshalled, err := toml.Marshal(c)
 	if err != nil {
 		log.Println("Failed to marshal config")
@@ -62,7 +62,7 @@ func (c *APMConfig) WriteToFile(path string) error {
 	return nil
 }
 
-func (c *APMConfig) Save() error {
+func (c *RALPMConfig) Save() error {
 	cfgMarshalled, err := toml.Marshal(c)
 	if err != nil {
 		log.Println("Failed to marshal config")
@@ -76,9 +76,9 @@ func (c *APMConfig) Save() error {
 	return nil
 }
 
-func GetConfig() *APMConfig {
+func GetConfig() *RALPMConfig {
 	if _cfg == nil {
-		_cfg = &APMConfig{}
+		_cfg = &RALPMConfig{}
 	}
 	return _cfg
 }

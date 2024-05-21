@@ -31,10 +31,10 @@ type PackageInstaller struct {
 	pkgInfo        PackageInfo
 	tmpDir         string
 	pkgCloneDir    string
-	cfg            *APMConfig
+	cfg            *RALPMConfig
 }
 
-func (pi *PackageInstaller) New(cfg *APMConfig, pkgInfo PackageInfo, installTesting bool) {
+func (pi *PackageInstaller) New(cfg *RALPMConfig, pkgInfo PackageInfo, installTesting bool) {
 	pi.cfg = cfg
 	pi.pkgInfo = pkgInfo
 	pi.installTesting = installTesting
@@ -42,7 +42,7 @@ func (pi *PackageInstaller) New(cfg *APMConfig, pkgInfo PackageInfo, installTest
 
 func (pi *PackageInstaller) bootstrap() bool {
 	var err error
-	pi.tmpDir, err = os.MkdirTemp("", "apm_tmp")
+	pi.tmpDir, err = os.MkdirTemp("", "ralpm_tmp")
 	if err != nil {
 		log.Println("Failed to create temporary directory:", err)
 		return false
@@ -141,9 +141,9 @@ func (pi *PackageInstaller) Install() bool {
 	cmd := exec.Command(installScriptPath, "install")
 	cmd.Env = append(
 		os.Environ(),
-		"APM_TMP_DIR="+pi.tmpDir,
-		"APM_PKG_INSTALL_DIR="+pkgInstallDir,
-		"APM_PKG_BIN_DIR="+filepath.Join(pi.cfg.InstallPath, BIN_DIR_NAME),
+		"RALPM_TMP_DIR="+pi.tmpDir,
+		"RALPM_PKG_INSTALL_DIR="+pkgInstallDir,
+		"RALPM_PKG_BIN_DIR="+filepath.Join(pi.cfg.InstallPath, BIN_DIR_NAME),
 	)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout

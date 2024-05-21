@@ -1,4 +1,4 @@
-module attifyos-package-manager
+module ralos-package-manager
 
 go 1.18
 
