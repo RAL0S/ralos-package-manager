@@ -100,4 +100,4 @@ To uninstall without prompt run,
 
 ## List of available packages
 
-The list of available packages can be found on the [package-index](https://github.com/RALOS/package-index)
+The list of available packages can be found on the [package-index](https://github.com/RAL0S/package-index)
