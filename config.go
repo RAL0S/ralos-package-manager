@@ -14,7 +14,7 @@ const (
 	BIN_DIR_NAME      = "bin"
 	PKG_DIR_NAME      = "packages"
 	CLONE_DIR_NAME    = "installers"
-	PACKAGE_INDEX_URL = "https://raw.githubusercontent.com/ral0S/package-index/main/index.toml"
+	PACKAGE_INDEX_URL = "https://raw.githubusercontent.com/ral0S/package-index/master/index.toml"
 )
 
 type PackageInfo struct {
